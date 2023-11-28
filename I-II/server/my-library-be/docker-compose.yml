@@ -1,0 +1,21 @@
+version: '3.9'
+
+services:
+  api:
+    build: .
+    ports:
+      - 8080:8080
+    links:
+      - mongodb
+    depends_on:
+      - mongodb
+    environment:
+      WAIT_HOSTS: mongodb:27017
+
+
+  mongodb:
+    image: mongo:7.0
+    ports:
+      - 27017:27017
+    volumes:
+      - ~/apps/mongo:/data/db
